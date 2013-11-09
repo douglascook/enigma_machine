@@ -1,9 +1,14 @@
-#include <vector>
+#ifndef PLUGBOARD_H
+#define PLUGBOARD_H
+
+#include "encryptor.h"
+using namespace std;
 
 class Plugboard: public Encryptor
 {
 public:
-    // may want to change this to use proper strings
     // constructor
-    Plugboard(const char *filepath, int& error);
+    Plugboard(std::vector<int> input);
 };
+
+#endif

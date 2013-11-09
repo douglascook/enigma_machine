@@ -1,9 +1,14 @@
-#include <vector>
+#ifndef REFLECTOR_H
+#define REFLECTOR_H
+
+#include "encryptor.h"
 
 class Reflector : public Encryptor
 {
 public:
     // may want to change this to use proper strings
     // constructor
-    Reflector(const char *filepath, int& error);
+    Reflector(std::vector<int> input);
 };
+
+#endif

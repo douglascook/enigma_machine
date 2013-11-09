@@ -1,4 +1,9 @@
+#ifndef ENCRYPTOR_H
+#define ENCRYPTOR_H
+
 #include <vector>
+#include <string>
+
 class Encryptor 
 {
 protected:
@@ -8,3 +13,5 @@ public:
     // this will return encrypted version of current letter 
     int encrypt(int letter);
 };
+
+#endif

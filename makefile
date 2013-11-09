@@ -1,5 +1,5 @@
-enigma : main.o enigmaMachine.o
-	g++ -Wall -g main.o enigmaMachine.o -o enigma
+enigma : main.o enigmaMachine.o encryptor.o plugboard.o rotor.o reflector.o
+	g++ -Wall -g main.o enigmaMachine.o encryptor.o plugboard.o rotor.o reflector.o -o enigma
 main.o : main.cpp enigmaMachine.h
 	g++ -Wall -g -c main.cpp
 enigmaMachine.o : enigmaMachine.cpp enigmaMachine.h encryptor.h plugboard.h rotor.h reflector.h
