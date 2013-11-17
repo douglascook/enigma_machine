@@ -11,10 +11,11 @@ class Encryptor
 protected:
     // encryption of the alphabet for this part of the machine
     std::vector<int> transformation;
+
 public:
     // constructor
     Encryptor();
-    // return encrypyted letter 
+    // return encrypyted ascii char code
     int encrypt(int letter);
 };
 

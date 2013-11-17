@@ -8,6 +8,7 @@ using namespace std;
 
 int main(int argc, const char **argv)
 {
+    char ch;
     int error_num = 0;
     vector<vector<int> > input_vectors;
 
@@ -21,7 +22,6 @@ int main(int argc, const char **argv)
     EnigmaMachine enigma(argc, input_vectors);
     enigma.construct_encryptors();
 
-    char ch;
     // continue taking input until interrupt is sent
     while (cin >> ws >> ch){
         if (invalid_character(ch)){

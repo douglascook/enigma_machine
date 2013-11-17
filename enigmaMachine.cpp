@@ -8,7 +8,7 @@ using namespace std;
 EnigmaMachine::EnigmaMachine(int argc, vector<vector<int> > config_vectors)
     : file_count(argc - 1), rotor_count(argc - 4), input_vectors(config_vectors)
 {
-    // case only plugboard and reflector are supplied
+    // case when only plugboard and reflector are supplied
     if (argc < 5){
         rotor_count = 0;
     }
@@ -59,10 +59,10 @@ void EnigmaMachine::rotate_rotors()
 
 char EnigmaMachine::encrypt(char letter)
 {
-    // convert from capital ascii char
+    // convert from capital ascii char into zero based code
     int char_code = letter - 65;
 
-    // rotate initial rotor first 
+    // rotate rotor(s)
     rotate_rotors();
 
     // plugboard

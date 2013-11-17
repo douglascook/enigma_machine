@@ -81,7 +81,7 @@ int check_files(int file_count, const char **filepaths, vector<vector<int> > &in
             return INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS;
         }
 
-        // check reflector has ALPHABET_SIZE inputs 
+        // check reflector has correct number of inputs 
         if (i == 2 && transformation.size() != ALPHABET_SIZE){
             cout << "Incorrect number of reflector parameters." << endl;
             return INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS;
@@ -93,7 +93,7 @@ int check_files(int file_count, const char **filepaths, vector<vector<int> > &in
             return INVALID_ROTOR_MAPPING;
         }
 
-        // check position file has specified starting positions for all rotors 
+        // check position file specifies starting positions for all rotors 
         if ((i == file_count) && static_cast<int>(transformation.size()) < file_count-3){
             cout << "Too few starting positions provided for rotors." << endl;
             return NO_ROTOR_STARTING_POSITION;

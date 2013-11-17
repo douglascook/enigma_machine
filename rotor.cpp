@@ -11,7 +11,7 @@ Rotor::Rotor(vector<int> input, int position)
         transformation[i] = input[i];
         transformation_reverse[input[i]] = i;
     }
-    // now set notches array
+    // set notches array
     for (unsigned i = ALPHABET_SIZE; i < input.size(); i++){
         notches[input[i]] = true;
     }
@@ -20,7 +20,7 @@ Rotor::Rotor(vector<int> input, int position)
 bool Rotor::rotate()
 {
     ++offset %= ALPHABET_SIZE;
-    // value is true if there is a notch at this position
+    // return value is true if there is a notch at this position
     return notches[offset];
 }
 
