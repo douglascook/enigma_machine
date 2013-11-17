@@ -4,13 +4,17 @@
 #include <vector>
 #include <string>
 
+const unsigned ALPHABET_SIZE = 26;
+
 class Encryptor 
 {
 protected:
     // encryption of the alphabet for this part of the machine
     std::vector<int> transformation;
 public:
-    // this will return encrypted version of current letter 
+    // constructor
+    Encryptor();
+    // return encrypyted letter 
     int encrypt(int letter);
 };
 

@@ -5,13 +5,23 @@
 
 using namespace std;
 
-// constructor for enigma machine (need a default one too?)
 EnigmaMachine::EnigmaMachine(int argc, vector<vector<int> > config_vectors)
     : file_count(argc - 1), rotor_count(argc - 4), input_vectors(config_vectors)
 {
-    // this is case of only plugboard and reflector
+    // case only plugboard and reflector are supplied
     if (argc < 5){
         rotor_count = 0;
+    }
+}
+
+EnigmaMachine::~EnigmaMachine()
+{
+    delete plugboard;
+    delete reflector;
+
+    // loop through and destruct each rotor
+    for (unsigned i = 0; i < rotor_count; i++){
+        delete rotors[i];
     }
 }
 
@@ -24,8 +34,8 @@ void EnigmaMachine::construct_encryptors()
 
     rotors.resize(rotor_count);
     // loop through to create vector of rotors
-    for (int i = 0; i < rotor_count; i++){
-        // rotors are specified left to right but we want to start at right
+    for (unsigned i = 0; i < rotor_count; i++){
+        // rotors are specified left to right but used from right to left 
         // so do this bit backwards, define rotors starting with last command line arg 
         position = input_vectors[file_count - 1][input_vectors[file_count - 1].size() - 1 - i];
         rotors[i] = new Rotor(input_vectors[file_count- i - 2], position);
@@ -36,8 +46,8 @@ void EnigmaMachine::rotate_rotors()
 {
     bool rotate_next;
     
-    // loop through rotors and rotate as needed
-    for (int i = 0; i < rotor_count; i++){
+    // loop through and rotate as needed
+    for (unsigned i = 0; i < rotor_count; i++){
         if (i == 0){
             rotate_next = rotors[i]->rotate();
         }else if (rotate_next){
@@ -49,17 +59,17 @@ void EnigmaMachine::rotate_rotors()
 
 char EnigmaMachine::encrypt(char letter)
 {
-    // firstly rotate the rotor(s)
+    // convert from capital ascii char
+    int char_code = letter - 65;
+
+    // rotate initial rotor first 
     rotate_rotors();
 
-    // convert from capital ascii char
-    int char_code = static_cast<int>(letter) - 65;
-
-    // plugboard first
+    // plugboard
     char_code = plugboard->encrypt(char_code);
 
     // rotors
-    for (int i = 0; i < rotor_count; i++){
+    for (unsigned i = 0; i < rotor_count; i++){
         char_code = rotors[i]->encrypt(char_code, false);
     }
 
@@ -73,8 +83,9 @@ char EnigmaMachine::encrypt(char letter)
         }
     }
 
-    // finally plugboard again
+    // plugboard again
     char_code = plugboard->encrypt(char_code);
     
-    return static_cast<char>(char_code + 65);
+    // convert back to capital ascii
+    return char_code + 65;
 }

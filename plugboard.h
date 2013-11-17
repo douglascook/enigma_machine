@@ -2,7 +2,6 @@
 #define PLUGBOARD_H
 
 #include "encryptor.h"
-using namespace std;
 
 class Plugboard: public Encryptor
 {

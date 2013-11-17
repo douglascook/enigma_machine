@@ -1,3 +1,6 @@
+#ifndef ENIGMA_H
+#define ENIGMA_H
+
 #include <vector>
 #include <string>
 
@@ -5,29 +8,31 @@
 #include "reflector.h"
 #include "rotor.h"
 
-using namespace std;
-
 class EnigmaMachine
 {
 private:
     int file_count;
     unsigned rotor_count;
-    vector<vector<int> > input_vectors;
+    std::vector<std::vector<int> > input_vectors;
 
     // pointers to the encryptors
     Plugboard* plugboard;
     Reflector* reflector;
-    vector<Rotor*> rotors;
+    std::vector<Rotor*> rotors;
 
     // function to rotate rotors 
     void rotate_rotors();
         
 public:
-    // create rotors and set pointers to them
+    // create plugboard, reflector and rotors and set pointers to them
     void construct_encryptors();
     // return encrypted letter
     char encrypt(char letter);
 
-    // constructor for enigma machine (need a default one too?)
-    EnigmaMachine(int argc, vector<vector<int> > config_vectors);
+    // constructor 
+    EnigmaMachine(int argc, std::vector<std::vector<int> > config_vectors);
+    // destructor is needed to destroy the plugboard, reflector and rotors
+    ~EnigmaMachine();
 };
+
+#endif

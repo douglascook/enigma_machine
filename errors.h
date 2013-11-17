@@ -1,3 +1,7 @@
+#include <vector>
+
+using namespace std;
+
 /* error codes  */
 #define INSUFFICIENT_NUMBER_OF_PARAMETERS		1
 #define INVALID_INPUT_CHARACTER				2
@@ -12,3 +16,9 @@
 #define ERROR_OPENING_CONFIGURATION_FILE		11
 
 #define NO_ERROR					0
+
+// check config files are valid 
+int check_files(int argc, const char **argv, vector<vector<int> > &input_vectors);
+
+// check that character is within A-Z
+bool invalid_character(char ch);

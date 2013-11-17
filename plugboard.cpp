@@ -6,15 +6,12 @@ using namespace std;
 Plugboard::Plugboard(vector<int> input)
 {
     int a, b;
-    // can we set its size before construction?
-    transformation.resize(26);
-
     // default to no change
-    for (int i = 0; i < 26; i++){
+    for (unsigned i = 0; i < ALPHABET_SIZE; i++){
         transformation[i] = i;
     }
 
-    for (int i = 0; i < input.size(); i++){
+    for (unsigned i = 0; i < input.size(); i++){
         if (i % 2 == 0){
             a = input[i];
         }else{

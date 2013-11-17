@@ -1,7 +1,9 @@
 #include "encryptor.h"
 
+Encryptor::Encryptor() : transformation(ALPHABET_SIZE) {
+}
+
 int Encryptor::encrypt(int letter)
 {
-    // this will return encrypted version of current letter 
     return transformation[letter];
 }

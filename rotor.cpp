@@ -4,44 +4,31 @@
 using namespace std;
 
 Rotor::Rotor(vector<int> input, int position)
-    : offset(position)
+    : offset(position), transformation_reverse(ALPHABET_SIZE), notches(26, false)
 {
-    transformation.resize(26);
-    transformation_reverse.resize(26);
-    notches.resize(input.size()-26);
-
-    // create mappings
-    for (int i = 0; i < 26; i++){
+    // create transformation mappings
+    for (unsigned i = 0; i < ALPHABET_SIZE; i++){
         transformation[i] = input[i];
         transformation_reverse[input[i]] = i;
     }
-
-    // now create array for notches 
-    for (int i = 26; i < input.size(); i++){
-        notches[i-26] = input[i];
+    // now set notches array
+    for (unsigned i = ALPHABET_SIZE; i < input.size(); i++){
+        notches[input[i]] = true;
     }
 }
 
 bool Rotor::rotate()
 {
-    offset = (++offset) % 26;
-
-    for (int i = 0; i < notches.size(); i++){
-        // if the current top letter matches a notch then want to rotate next
-        if (offset == notches[i]){
-            return true;
-        }
-    }
-    return false;
+    ++offset %= ALPHABET_SIZE;
+    // value is true if there is a notch at this position
+    return notches[offset];
 }
 
 int Rotor::encrypt(int letter, bool return_trip)
 {
     if (return_trip){
         // use reverse mappings for return trip
-        return (transformation_reverse[(letter + offset) % 26] - offset + 26) % 26;
-    }else{
-        // this will return encrypted version of current letter 
-        return (transformation[(letter + offset) % 26] - offset + 26) % 26;
+        return (transformation_reverse[(letter + offset) % ALPHABET_SIZE] - offset + ALPHABET_SIZE) % ALPHABET_SIZE;
     }
+    return (transformation[(letter + offset) % ALPHABET_SIZE] - offset + ALPHABET_SIZE) % ALPHABET_SIZE;
 }
