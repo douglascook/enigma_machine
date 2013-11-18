@@ -30,9 +30,8 @@ int check_files(int file_count, const char **filepaths, vector<vector<int> > &in
             return ERROR_OPENING_CONFIGURATION_FILE;
         }
 
-        // this sets EOF flag if file is empty, needed so we dont check inputs of null plugboard
-        // if any other files are empty error will be caught below
-        config_file.peek();
+        // strip whitespace so we start at end of file if provided config file is empty eg for null plugboard
+        config_file >> ws;
 
         // loop through config file checking each number is valid
         while (!config_file.eof()){
